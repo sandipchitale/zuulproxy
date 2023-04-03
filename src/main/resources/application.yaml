@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: zuulproxy
+  cloud:
+    # The following block delcares that spring-cloud Hoxton:SR10 (Netflix Zuul) can run in
+    # SpringBoot versions
+    compatibility-verifier:
+      compatible-boot-versions:
+      - 2.4.x
+      - 2.5.x
+      - 2.6.x
+      - 2.7.x
+  security:
+    user:
+      name: user
+      password: password
+
+zuul:
+  include-debug-header: true
+  debug:
+    request: true
+  debugFilters:
+    disabled: true
+  routes:
+    reqres:
+      path: /reqres/**
+      stripPrefix: true
+      url: https://reqres.in/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    _org.springframework.web.servlet.HandlerMapping.Mappings: DEBUG
